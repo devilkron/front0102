@@ -1,17 +1,21 @@
-import RegisterForm from "./layout/RegisterForm"
+import useAuth from "./hooks/useAuth";
+import AppRouter from "./routes/appRouter";
+import { useState } from "react";
+
 
 function App() {
+  const { loading, theme } = useAuth();
 
+  if(loading){
+    return (
+      <p className="text-4xl text-primary">LOADING</p>
+    )
+  }
   return (
-    <div data-theme="" className="min-h-screen">
-    <h1 className="text-center text-pink-300 bg-sky-400 text-3xl font-bold underline">
-      Hello world!
-    </h1>
-    <input type="checkbox" value="light" className="toggle theme-controller"/>    
-    <hr />
-    <RegisterForm/>
+    <div data-theme={theme ? "dark": "light"} className="min-h-screen">
+      <AppRouter />
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
